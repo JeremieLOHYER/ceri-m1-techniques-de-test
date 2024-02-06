@@ -5,10 +5,6 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk  # Utilisation de l'image Docker avec Java 8
 
-    branches:
-      only:
-        - origin/master  # Branche master uniquement
-
     steps:
       - checkout  # Récupération du code source du repository
 
