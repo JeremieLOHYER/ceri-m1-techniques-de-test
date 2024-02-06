@@ -7,7 +7,7 @@ jobs:
 
     branches:
       only:
-        - master  # Branche master uniquement
+        - origin/master  # Branche master uniquement
 
     steps:
       - checkout  # Récupération du code source du repository
