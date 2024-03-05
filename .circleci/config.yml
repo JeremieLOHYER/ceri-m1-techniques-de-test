@@ -1,6 +1,11 @@
 version: 2.1
 
 jobs:
+  checkout:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
   build:
     docker:
       - image: circleci/openjdk:8-jdk  # Utilisation de l'image Docker avec Java 8
@@ -19,7 +24,6 @@ jobs:
       - run:
           name: Run Unit Tests
           command: mvn test
-
 
 orbs:
   codecov: codecov/codecov@4.0.1
