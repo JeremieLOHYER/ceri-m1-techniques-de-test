@@ -6,6 +6,13 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+  codecov/upload:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - run:
+          name: Upload coverage to Codecov
+          command: bash <(curl -s https://codecov.io/bash)
   build:
     docker:
       - image: circleci/openjdk:8-jdk  # Utilisation de l'image Docker avec Java 8
