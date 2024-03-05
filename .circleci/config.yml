@@ -22,7 +22,7 @@ jobs:
           name: Run Unit Tests
           command: mvn test
 
-  codecov/upload:
+  upload:
     docker:
       - image: circleci/python:3.8
     steps:
@@ -39,6 +39,6 @@ workflows:
     jobs:
       - checkout
       - build
-      - codecov/upload:
+      - upload:
           requires:
             - build
