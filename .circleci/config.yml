@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   checkout:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
 
@@ -14,17 +14,19 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Maven
+          name: Install Maven and JaCoCo
           command: |
             sudo apt-get update
             sudo apt-get install -y maven
+            mvn org.jacoco:jacoco-maven-plugin:prepare-agent test
+
       - run:
           name: Run Unit Tests
           command: mvn test
 
   upload:
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run:

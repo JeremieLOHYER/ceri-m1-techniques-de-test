@@ -1,5 +1,9 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
+[![codecov](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test/graph/badge.svg?token=O3BD5TUUG7)](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test)
+
+<img src="https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test/graphs/tree.svg?token=O3BD5TUUG7">
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
