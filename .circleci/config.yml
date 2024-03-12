@@ -25,10 +25,7 @@ workflows:
   version: 2
   upload-to-codecov:
     jobs:
-      - checkout
-      - build:
-          requires:
-            - checkout
+      - build
       - upload:
           requires:
             - build
