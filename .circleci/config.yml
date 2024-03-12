@@ -26,7 +26,6 @@ jobs:
       - codecov/upload
 
 workflows:
-  version: 2
   upload-to-codecov:
     jobs:
       - build
