@@ -1,7 +1,7 @@
 version: 2.1
 
 orb:
-  codecov: codecov/codecov@1.0.2
+  codecov: codecov/codecov@4.0.1
 
 jobs:
 
