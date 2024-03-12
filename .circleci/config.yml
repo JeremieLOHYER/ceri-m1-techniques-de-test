@@ -1,6 +1,6 @@
 version: 2.1
 
-orb:
+orbs:
   codecov: codecov/codecov@4.0.1
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/openjdk:8
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run:
