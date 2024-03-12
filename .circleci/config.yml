@@ -23,7 +23,8 @@ jobs:
       - run:
           name: Run test
           command: mvn test
-      - codecov/upload
+      - codecov/upload:
+          - file: target/site/jacoco
 
 workflows:
   version: 2
