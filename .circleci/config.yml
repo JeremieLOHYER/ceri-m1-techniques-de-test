@@ -21,9 +21,13 @@ jobs:
       - image: cimg/openjdk:8.0
     steps:
       - checkout
+      -  run:
+          name: Build with Maven and run tests
+          command: mvn clean verify
+
       - run:
-          name: Run test
-          command: mvn verify
+          name: Generate JaCoCo report
+          command: mvn jacoco:report
       - codecov/upload
 
 workflows:
