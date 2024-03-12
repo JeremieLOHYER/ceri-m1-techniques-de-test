@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: run
-          command: mvn -B -DskipTests clean package
+          command: mvn -B clean package
 
   upload:
     docker:
