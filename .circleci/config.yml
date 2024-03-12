@@ -33,7 +33,4 @@ jobs:
 workflows:
   upload-to-codecov:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - test
