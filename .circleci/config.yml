@@ -9,11 +9,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Maven and JaCoCo
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y maven
-            mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+          name: run
+          command: mvn -B -DskipTests clean package
 
   upload:
     docker:
