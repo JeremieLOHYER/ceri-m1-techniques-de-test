@@ -14,13 +14,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Maven
+          name: Install Maven and JaCoCo
           command: |
             sudo apt-get update
             sudo apt-get install -y maven
+            mvn org.jacoco:jacoco-maven-plugin:prepare-agent test
+
       - run:
           name: Run Unit Tests
           command: mvn test
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/site/jacoco/jacoco.xml
 
   upload:
     docker:
