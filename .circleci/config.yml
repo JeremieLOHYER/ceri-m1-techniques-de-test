@@ -7,7 +7,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:8.0
 
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:8.0
     steps:
       - checkout
       - run:
