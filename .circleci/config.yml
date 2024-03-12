@@ -1,5 +1,8 @@
 version: 2.1
 
+orb:
+  codecov: codecov/codecov
+
 jobs:
 
   build:
@@ -12,20 +15,21 @@ jobs:
           name: run
           command: mvn -B clean package
 
-  upload:
+  test:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run:
-          name: Upload coverage to Codecov
-          command: bash <(curl -s https://codecov.io/bash)
+          name: Run test
+          command: mvn test
+      - codecov/upload
 
 workflows:
   version: 2
   upload-to-codecov:
     jobs:
       - build
-      - upload:
+      - test:
           requires:
             - build
