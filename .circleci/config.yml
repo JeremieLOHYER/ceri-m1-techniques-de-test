@@ -23,9 +23,6 @@ jobs:
       - run:
           name: Run test
           command: mvn test
-      - run:
-          name: code coveraging
-          command: mvn jacoco:report
       - codecov/upload
 
 workflows:
