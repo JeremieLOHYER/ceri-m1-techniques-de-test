@@ -15,6 +15,7 @@ jobs:
           name: run
           command: mvn -B clean package
 
+
   test:
     docker:
       - image: cimg/openjdk:21.0
