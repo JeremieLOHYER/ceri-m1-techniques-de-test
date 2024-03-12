@@ -14,9 +14,6 @@ jobs:
       - run:
           name: run
           command: mvn -B clean package
-      - run:
-          name: report
-          command: mvn jacoco:report
 
 
   test:
@@ -26,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: Run test
-          command: mvn test
+          command: mvn verify
       - codecov/upload
 
 workflows:
