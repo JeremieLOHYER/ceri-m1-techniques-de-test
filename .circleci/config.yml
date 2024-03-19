@@ -11,11 +11,7 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: run
-          command: mvn -B clean package
-      - run: mvn --version
-      - run: mvn test
+      - run: mvn verify
 
 
   test:
