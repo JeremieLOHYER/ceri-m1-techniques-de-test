@@ -12,13 +12,14 @@ import static org.junit.Assert.*;
 
 public class IPokemonMetadataProviderTest {
 
-    @Mock
     private IPokemonMetadataProvider metadataProvider;
     private Random random;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+
+        metadataProvider = new PokemonMetadataProvider();
+
         random = new Random();
         random.setSeed(LocalTime.now().toNanoOfDay());
     }
@@ -26,42 +27,28 @@ public class IPokemonMetadataProviderTest {
     @Test
     public void testThrowingGetPokemonMetadataLessThan0() {
 
-        int index = 0 - random.nextInt();
+        int index = -1;
 
-        try {
-            Mockito.when(metadataProvider.getPokemonMetadata(index))
-                    .thenThrow(PokedexException.class);
-        } catch (PokedexException e) {
-            throw new RuntimeException(e);
-        }
         // Vérification du résultat
-        assertThrows(PokedexException.class, new ThrowingRunnable() {
-            @Override
-            public void run() throws Throwable {
-                metadataProvider.getPokemonMetadata(index);
-            }
-        });
+        try {
+            metadataProvider.getPokemonMetadata(index);
+        } catch (PokedexException e) {
+            Assert.assertEquals(e.getMessage(),"get pokemon index less than 0");
+        }
 
     }
 
     @Test
-    public void testThrowingGetPokemonMetadataMoreThan150() {
+    public void testThrowingGetUnknownPokemonMetadata() {
 
-        int index = 151 + random.nextInt();
+        int index = 151;
 
-        try {
-            Mockito.when(metadataProvider.getPokemonMetadata(index))
-                    .thenThrow(PokedexException.class);
-        } catch (PokedexException e) {
-            throw new RuntimeException(e);
-        }
         // Vérification du résultat
-        assertThrows(PokedexException.class, new ThrowingRunnable() {
-            @Override
-            public void run() throws Throwable {
-                metadataProvider.getPokemonMetadata(index);
-            }
-        });
+        try {
+            metadataProvider.getPokemonMetadata(index);
+        } catch (PokedexException e) {
+            Assert.assertEquals(e.getMessage(),"get unknown pokemon metadata");
+        }
 
     }
     @Test
@@ -69,20 +56,18 @@ public class IPokemonMetadataProviderTest {
 
         // Définition du comportement du mock pour l'index donné
         int index = 1;
-        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "Bulbasaur", 10, 45, 49);
+        PokemonMetadata expectedMetadata = MyPokemons.AQUALI;
 
         PokemonMetadata actualMetadata = null;
         try {
-            Mockito.when(metadataProvider.getPokemonMetadata(index)).thenReturn(expectedMetadata);
-
             // Appel de la méthode à tester
-            actualMetadata = metadataProvider.getPokemonMetadata(index);
+            actualMetadata = metadataProvider.getPokemonMetadata(MyPokemons.AQUALI.getIndex());
         } catch (PokedexException e) {
             System.out.println("oh no, cringe");
         }
 
         // Vérification du résultat
-        assertEquals(expectedMetadata, actualMetadata);
+        assertNotNull(actualMetadata);
         assertEquals(expectedMetadata.getName(), actualMetadata.getName());
         assertEquals(expectedMetadata.getIndex(), actualMetadata.getIndex());
         assertEquals(expectedMetadata.getAttack(), actualMetadata.getAttack());

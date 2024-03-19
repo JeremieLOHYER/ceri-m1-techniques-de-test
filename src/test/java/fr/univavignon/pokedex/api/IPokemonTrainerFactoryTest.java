@@ -9,20 +9,21 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 public class IPokemonTrainerFactoryTest {
-    @Mock
+
     private IPokemonTrainerFactory pokemonTrainerFactory;
 
-    @Mock
     private IPokedexFactory pokedexFactory;
 
-    @Mock
     private IPokedex pokedex;
 
     private Random random;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        pokemonTrainerFactory = new PokemonTrainerFactory();
+        pokedexFactory = new PokedexFactory();
+        pokedex = new Pokedex(new PokemonMetadataProvider(), new PokemonFactory());
+
         random = new Random();
         random.setSeed(LocalTime.now().toNanoOfDay());
     }
@@ -59,14 +60,12 @@ public class IPokemonTrainerFactoryTest {
 
         PokemonTrainer expectedPokemonTrainer = new PokemonTrainer(name, team, pokedex);
 
-        Mockito.when(pokemonTrainerFactory.createTrainer(name, team, pokedexFactory)).thenReturn(expectedPokemonTrainer);
-
         PokemonTrainer actualPokemonTrainer = pokemonTrainerFactory.createTrainer(name,team,pokedexFactory);
 
-        assertEquals(expectedPokemonTrainer, actualPokemonTrainer);
+        assertNotNull(actualPokemonTrainer);
 
+        assertNotNull(actualPokemonTrainer.getPokedex());
         assertEquals(expectedPokemonTrainer.getName(), actualPokemonTrainer.getName());
-        assertEquals(expectedPokemonTrainer.getPokedex(), actualPokemonTrainer.getPokedex());
         assertEquals(expectedPokemonTrainer.getTeam(), actualPokemonTrainer.getTeam());
     }
 }

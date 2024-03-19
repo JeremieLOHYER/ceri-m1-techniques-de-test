@@ -12,14 +12,16 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 public class IPokedexTest {
-    @Mock
+
     private IPokedex pokedex;
 
     private Random random;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        pokedex = new Pokedex(new PokemonMetadataProvider(), new PokemonFactory());
+        pokedex.addPokemon(MyPokemons.BULBIZARRE);
+
         random = new Random();
         random.setSeed(LocalTime.now().toNanoOfDay());
     }
@@ -27,9 +29,7 @@ public class IPokedexTest {
     @Test
     public void testSize() {
 
-        int expectedSize = random.nextInt() % 300;
-
-        Mockito.when(pokedex.size()).thenReturn(expectedSize);
+        int expectedSize = 1;
 
         int actualSize = pokedex.size();
 
@@ -39,13 +39,11 @@ public class IPokedexTest {
     @Test
     public void testAddPokemon() {
 
-        int expectedOldSize = random.nextInt() % 300;
+        int expectedOldSize = 1;
 
         int expectedUniqueIndex = expectedOldSize;
 
         Pokemon aPokemon = MyPokemons.BULBIZARRE;
-
-        Mockito.when(pokedex.addPokemon(aPokemon)).thenReturn(expectedUniqueIndex);
 
         int actualUniqueIndex = pokedex.addPokemon(aPokemon);
 
@@ -55,47 +53,31 @@ public class IPokedexTest {
     @Test
     public void testGetPokemonThrowingWhenLessThan0() {
 
-        int index = 0 - random.nextInt();
-
-        try {
-            Mockito.when(pokedex.getPokemon(index))
-                    .thenThrow(new PokedexException("get pokemon index less than 0"));
-        } catch (PokedexException e) {
-            throw new RuntimeException(e);
-        }
+        int index = -1;
         // Vérification du résultat
         try {
             pokedex.getPokemon(index);
         } catch (PokedexException e) {
-            Assert.assertEquals(e.getMessage(),"get pokemon index less than 0");
+            Assert.assertEquals("get pokemon index less than 0", e.getMessage());
         }
     }
 
     @Test
     public void testGetPokemonThrowingWhenMoreThanSize() {
 
-        int size = random.nextInt() % 300;
-
-        int index = size + random.nextInt();
-
-        try {
-            Mockito.when(pokedex.getPokemon(index))
-                    .thenThrow(new PokedexException("get pokemon index over size of pokedex"));
-        } catch (PokedexException e) {
-            throw new RuntimeException(e);
-        }
+        int index = 300;
         // Vérification du résultat
         try {
             pokedex.getPokemon(index);
         } catch (PokedexException e) {
-            Assert.assertEquals(e.getMessage(),"get pokemon index over size of pokedex");
+            Assert.assertEquals("get pokemon index over size of pokedex",e.getMessage());
         }
     }
 
     @Test
     public void testGetPokemon() {
 
-        int size = random.nextInt() % 300 + 1;
+        int size = pokedex.size();
 
         int index = random.nextInt() % size;
 
@@ -104,8 +86,6 @@ public class IPokedexTest {
         Pokemon actualPokemon = null;
 
         try {
-            Mockito.when(pokedex.getPokemon(index)).thenReturn(expectedPokemon);
-
             actualPokemon = pokedex.getPokemon(index);
         } catch (PokedexException e) {
             throw new RuntimeException(e);
@@ -117,16 +97,20 @@ public class IPokedexTest {
     @Test
     public void testGetPokemons() {
 
-        Pokemon aPokemon = MyPokemons.BULBIZARRE;
         Pokemon anotherPokemon = MyPokemons.AQUALI;
         Pokemon againAPokemon = MyPokemons.BULBIZARRE;
 
         List<Pokemon> expectedPokemons = new ArrayList<>();
-        expectedPokemons.add(aPokemon);
+        try {
+            expectedPokemons.add(pokedex.getPokemon(0));
+        } catch (PokedexException e) {
+            throw new RuntimeException(e);
+        }
         expectedPokemons.add(anotherPokemon);
         expectedPokemons.add(againAPokemon);
 
-        Mockito.when(pokedex.getPokemons()).thenReturn(expectedPokemons);
+        pokedex.addPokemon(anotherPokemon);
+        pokedex.addPokemon(againAPokemon);
 
         List<Pokemon> actualPokemons = pokedex.getPokemons();
 
@@ -136,14 +120,22 @@ public class IPokedexTest {
     @Test
     public void testGetPokemonsCompared() {
 
-        Pokemon aPokemon = MyPokemons.BULBIZARRE;
+
         Pokemon anotherPokemon = MyPokemons.AQUALI;
         Pokemon againAPokemon = MyPokemons.BULBIZARRE;
 
         List<Pokemon> expectedPokemons = new ArrayList<>();
-        expectedPokemons.add(aPokemon);
+        try {
+            expectedPokemons.add(pokedex.getPokemon(0));
+        } catch (PokedexException e) {
+            throw new RuntimeException(e);
+        }
         expectedPokemons.add(anotherPokemon);
         expectedPokemons.add(againAPokemon);
+
+        pokedex.addPokemon(anotherPokemon);
+        pokedex.addPokemon(againAPokemon);
+
 
         Comparator<Pokemon> usedComparator = new Comparator<Pokemon>() {
             @Override
@@ -152,7 +144,7 @@ public class IPokedexTest {
             }
         };
 
-        Mockito.when(pokedex.getPokemons(usedComparator)).thenReturn(expectedPokemons);
+        expectedPokemons.sort(usedComparator);
 
         List<Pokemon> actualPokemons = pokedex.getPokemons(usedComparator);
 

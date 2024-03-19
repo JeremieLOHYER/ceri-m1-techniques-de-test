@@ -12,23 +12,20 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 public class IPokedexFactoryTest {
-    @Mock
-    private IPokedexFactory pokedexFactory;
-
-    @Mock
-    private IPokedex pokedex;
-
-    @Mock
-    private IPokemonMetadataProvider pokemonMetadataProvider;
-
-    @Mock
     private IPokemonFactory pokemonFactory;
+    private IPokedexFactory pokedexFactory;
+    private IPokemonMetadataProvider pokemonMetadataProvider;
+    private IPokedex pokedex;
 
     private Random random;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        pokemonFactory = new PokemonFactory();
+        pokemonMetadataProvider = new PokemonMetadataProvider();
+        pokedex = new Pokedex(pokemonMetadataProvider,pokemonFactory);
+        pokedexFactory = new PokedexFactory();
+
         random = new Random();
         random.setSeed(LocalTime.now().toNanoOfDay());
     }
@@ -36,12 +33,8 @@ public class IPokedexFactoryTest {
     @Test
     public void testCreatePokedex() {
 
-        IPokedex expectedPokedex = pokedex;
-
-        Mockito.when(pokedexFactory.createPokedex(pokemonMetadataProvider,pokemonFactory)).thenReturn(expectedPokedex);
-
         IPokedex actualPokedex = pokedexFactory.createPokedex(pokemonMetadataProvider,pokemonFactory);
 
-        assertEquals(expectedPokedex, actualPokedex);
+        assertNotNull(actualPokedex);
     }
 }
