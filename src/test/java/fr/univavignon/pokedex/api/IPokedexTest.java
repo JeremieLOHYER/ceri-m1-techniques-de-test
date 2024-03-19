@@ -95,7 +95,7 @@ public class IPokedexTest {
     @Test
     public void testGetPokemon() {
 
-        int size = random.nextInt() % 300;
+        int size = random.nextInt() % 300 + 1;
 
         int index = random.nextInt() % size;
 
