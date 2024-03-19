@@ -27,7 +27,7 @@ jobs:
           name: Generate JaCoCo report
           command: mvn jacoco:report
       - codecov/upload:
-          token: 6b916898-52fa-4c42-81bf-15bcc6e17bfe
+          token: CODECOV_TOKEN
 
 workflows:
   upload-to-codecov:
