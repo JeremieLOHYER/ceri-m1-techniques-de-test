@@ -39,7 +39,7 @@ public class IPokemonFactoryTest {
 
         assertEquals(expectedPokemon,actualPokemon);
 
-        assertEquals(expectedPokemon.getIv(),actualPokemon.getIv());
+        assertEquals(expectedPokemon.getIv(),actualPokemon.getIv(), 0.01);
         assertEquals(expectedPokemon.getHp(),actualPokemon.getHp());
         assertEquals(expectedPokemon.getCp(),actualPokemon.getCp());
         assertEquals(expectedPokemon.getDust(),actualPokemon.getDust());
