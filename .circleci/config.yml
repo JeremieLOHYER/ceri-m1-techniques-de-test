@@ -28,7 +28,6 @@ jobs:
           command: mvn jacoco:report
       - codecov/upload:
           token: CODECOV_TOKEN
-          slug: https://app.codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test
 
 workflows:
   upload-to-codecov:
