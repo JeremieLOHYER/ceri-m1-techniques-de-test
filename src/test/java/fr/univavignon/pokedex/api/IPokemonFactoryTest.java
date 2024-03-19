@@ -38,5 +38,11 @@ public class IPokemonFactoryTest {
         Pokemon actualPokemon = factory.createPokemon(index,cp,hp,dust,candy);
 
         assertEquals(expectedPokemon,actualPokemon);
+
+        assertEquals(expectedPokemon.getIv(),actualPokemon.getIv());
+        assertEquals(expectedPokemon.getHp(),actualPokemon.getHp());
+        assertEquals(expectedPokemon.getCp(),actualPokemon.getCp());
+        assertEquals(expectedPokemon.getDust(),actualPokemon.getDust());
+        assertEquals(expectedPokemon.getCandy(),actualPokemon.getCandy());
     }
 }

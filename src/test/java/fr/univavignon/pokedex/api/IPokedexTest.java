@@ -59,17 +59,16 @@ public class IPokedexTest {
 
         try {
             Mockito.when(pokedex.getPokemon(index))
-                    .thenThrow(PokedexException.class);
+                    .thenThrow(new PokedexException("get pokemon index less than 0"));
         } catch (PokedexException e) {
             throw new RuntimeException(e);
         }
         // Vérification du résultat
-        assertThrows(PokedexException.class, new ThrowingRunnable() {
-            @Override
-            public void run() throws Throwable {
-                pokedex.getPokemon(index);
-            }
-        });
+        try {
+            pokedex.getPokemon(index);
+        } catch (PokedexException e) {
+            Assert.assertEquals(e.getMessage(),"get pokemon index less than 0");
+        }
     }
 
     @Test
@@ -81,17 +80,16 @@ public class IPokedexTest {
 
         try {
             Mockito.when(pokedex.getPokemon(index))
-                    .thenThrow(PokedexException.class);
+                    .thenThrow(new PokedexException("get pokemon index over size of pokedex"));
         } catch (PokedexException e) {
             throw new RuntimeException(e);
         }
         // Vérification du résultat
-        assertThrows(PokedexException.class, new ThrowingRunnable() {
-            @Override
-            public void run() throws Throwable {
-                pokedex.getPokemon(index);
-            }
-        });
+        try {
+            pokedex.getPokemon(index);
+        } catch (PokedexException e) {
+            Assert.assertEquals(e.getMessage(),"get pokemon index over size of pokedex");
+        }
     }
 
     @Test

@@ -53,5 +53,9 @@ public class IPokemonTrainerFactoryTest {
         PokemonTrainer actualPokemonTrainer = pokemonTrainerFactory.createTrainer(name,team,pokedexFactory);
 
         assertEquals(expectedPokemonTrainer, actualPokemonTrainer);
+
+        assertEquals(expectedPokemonTrainer.getName(), actualPokemonTrainer.getName());
+        assertEquals(expectedPokemonTrainer.getPokedex(), actualPokemonTrainer.getPokedex());
+        assertEquals(expectedPokemonTrainer.getTeam(), actualPokemonTrainer.getTeam());
     }
 }

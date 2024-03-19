@@ -83,5 +83,10 @@ public class IPokemonMetadataProviderTest {
 
         // Vérification du résultat
         assertEquals(expectedMetadata, actualMetadata);
+        assertEquals(expectedMetadata.getName(), actualMetadata.getName());
+        assertEquals(expectedMetadata.getIndex(), actualMetadata.getIndex());
+        assertEquals(expectedMetadata.getAttack(), actualMetadata.getAttack());
+        assertEquals(expectedMetadata.getDefense(), actualMetadata.getDefense());
+        assertEquals(expectedMetadata.getStamina(), actualMetadata.getStamina());
     }
 }
