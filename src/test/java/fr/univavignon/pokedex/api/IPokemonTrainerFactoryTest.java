@@ -28,6 +28,17 @@ public class IPokemonTrainerFactoryTest {
     }
 
     @Test
+    public void testTeam() {
+        Team valor = Team.VALOR;
+        Team instinct = Team.INSTINCT;
+        Team mystic = Team.MYSTIC;
+
+        assertEquals(Team.VALOR, valor);
+        assertEquals(Team.INSTINCT, instinct);
+        assertEquals(Team.MYSTIC, mystic);
+    }
+
+    @Test
     public void testCreateTrainer() {
 
         String name = "jesuisco";
