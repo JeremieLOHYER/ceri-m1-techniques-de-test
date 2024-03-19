@@ -1,7 +1,7 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
 [![codecov](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test/graph/badge.svg?token=O3BD5TUUG7)](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test)
-
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/JU74oc9dEAZeDvzo9YPBkg/NvGBgKugxvStj8GqtJqcDx/tree/main.svg?style=svg&circle-token=CCIPRJ_PdgANXnvDoxbast45jXpLw_663ee1fcb6ca6b7bb8a265b79322d9aab9038925)](https://dl.circleci.com/status-badge/redirect/circleci/JU74oc9dEAZeDvzo9YPBkg/NvGBgKugxvStj8GqtJqcDx/tree/main)
 <img src="https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test/graphs/tree.svg?token=O3BD5TUUG7">
 
 ## Introduction
