@@ -55,6 +55,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <configLocation>checkstyle/config.xml</configLocation>
+                            <outputFile>target/checkstyle-result.xml</outputFile>
                             <sourceDirectories>
                                 <sourceDirectory>src/main/java</sourceDirectory>
                                 <sourceDirectory>src/test/java</sourceDirectory>
@@ -72,11 +73,13 @@
                 <version>1.0.0</version>
                 <executions>
                     <execution>
-                        <phase>post-site</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>badges</goal>
                         </goals>
                         <configuration>
+                            <skip>${badges.skip}</skip>
+                            <outputDir>checkstyle/badge</outputDir>
                             <inputFiles>
                                 <inputFile>target/checkstyle-result.xml</inputFile>
                             </inputFiles>

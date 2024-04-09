@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test/graph/badge.svg?token=O3BD5TUUG7)](https://codecov.io/gh/JeremieLOHYER/ceri-m1-techniques-de-test)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/JeremieLOHYER/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/JeremieLOHYER/ceri-m1-techniques-de-test/tree/master)
-![Checkstyle Badge](target/site/badges/checkstyle-badge.svg)
+![Checkstyle Badge](checkstyle/badge/checkstyle-result.svg)
 
 
 
