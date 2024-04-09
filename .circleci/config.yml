@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run: mvn verify
+      - run:
+          name: Making badge
+          command: mvn badger:badges
 
 
   test:
